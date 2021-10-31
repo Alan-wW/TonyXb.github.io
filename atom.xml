@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-10-23T14:49:56.000Z</updated>
+  <updated>2021-10-31T10:26:54.545Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试</title>
+    <link href="http://example.com/2021/10/31/%E6%B5%8B%E8%AF%95/"/>
+    <id>http://example.com/2021/10/31/%E6%B5%8B%E8%AF%95/</id>
+    <published>2021-10-31T10:21:17.000Z</published>
+    <updated>2021-10-31T10:26:54.545Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="sadasd"><a href="#sadasd" class="headerlink" title="sadasd"></a>sadasd</h1><p>Dasd</p><p>salads</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;sadasd&quot;&gt;&lt;a href=&quot;#sadasd&quot; class=&quot;headerlink&quot; title=&quot;sadasd&quot;&gt;&lt;/a&gt;sadasd&lt;/h1&gt;&lt;p&gt;Dasd&lt;/p&gt;
+&lt;p&gt;salads&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="sdaa" scheme="http://example.com/tags/sdaa/"/>
+    
+  </entry>
   
   <entry>
     <title>Lc743-网络延迟时间</title>
@@ -479,33 +503,6 @@
     
     
     <category term="消息队列" scheme="http://example.com/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis的高可用解决方案</title>
-    <link href="http://example.com/2021/09/18/Redis%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    <id>http://example.com/2021/09/18/Redis%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
-    <published>2021-09-18T08:13:25.000Z</published>
-    <updated>2021-09-19T02:09:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h1><blockquote><p>主从模式所带来的问题</p></blockquote><p>主从模式下，当主服务器宕机后，需要手动把一台从服务器切换为主服务器，这就需要人工干预， 费事费力，还会造成一段时间内服务不可用。这种方式并不推荐，实际生产中，我们优先考虑哨兵 模式。这种模式下，master 宕机，哨兵会自动选举 master 并将其他的 slave 指向新的 master。</p><p>Redis Sentinel是社区版本推出的原生高可用解决方案，其部署架构主要包括两部分：Redis Sentinel集群和Redis数据集群。 其中Redis Sentinel集群是由若干Sentinel节点组成的分布式集群，可以实现故障发现、故障自动转移、 配置中心和客户端通知。Redis Sentinel的节点数量要满足2n+1（n&gt;=1）的奇数个。</p><blockquote><p>Sentinel集群为什么要设置成奇数个呢？</p></blockquote><p>因为在集群中，半数以上节点认为主节点故障了，才会选举新的节点。奇数个节点是为了节省资源，如果对性能有要求可以配置偶数个</p><p><img src="/pic/sentinel%E6%9E%B6%E6%9E%84.png" alt="image-20210918162517305"></p><blockquote><p>优点</p></blockquote><ul><li>Redis Sentinel集群部署简单</li><li>能够解决Redis主从模式下的高可用切换问题</li><li>很方便实现Redis数据节点的线形扩展，轻松突破Redis自身单线程瓶颈，可极大满足Redis大容量 或高性能的业务需求；</li><li>可以实现一套Sentinel监控一组Redis数据节点或多组数据节点</li></ul><blockquote><p>缺点</p></blockquote><ul><li>部署相对Redis主从模式要复杂一些，原理理解更繁琐</li><li>资源浪费，Redis数据节点中slave节点作为备份节点不提供服务；</li><li>Redis Sentinel主要是针对Redis数据节点中的主节点的高可用切换，对Redis的数据节点做失败判 定分为主观下线和客观下线两种，对于Redis的从节点有对节点做主观下线操作，并不执行故障转 移。</li><li>不能解决读写分离问题，实现起来相对复杂。</li></ul><h2 id="高可用方案具体实现"><a href="#高可用方案具体实现" class="headerlink" title="高可用方案具体实现"></a>高可用方案具体实现</h2><p>当主节点出现故障时，由Sentinel自动完成故障发现和转 移，并通知应用方，实现高可用性。它有四个主要功能</p><ul><li>集群监控，负责监控Redis master和slave进程是否正常工作。</li><li>消息通知，如果某个Redis实例有故障，那么哨兵负责发送消息作为报警通知给管理员</li><li>故障转移，如果master node挂掉了，会自动转移到slave node上</li><li>配置中心，如果故障转移发生了，通知client客户端新的master地址</li></ul><h2 id="Redis哨兵如何工作？"><a href="#Redis哨兵如何工作？" class="headerlink" title="Redis哨兵如何工作？"></a>Redis哨兵如何工作？</h2><ol><li>每个Sentinel以每秒钟一次的频率向它所知的Master，Slave以及其他 Sentinel 实例发送一个 PING 命令。</li><li>如果一个实例（instance）距离最后一次有效回复 PING 命令的时间超过 down-after-milliseconds 选项所指定的值， 则这个实例会被当前 Sentinel 标记为主观下线。</li><li>如果一个Master被标记为主观下线，则正在监视这个Master的所有 Sentinel 要以每秒一次的频率 确认Master的确进入了主观下线状态</li><li> 当有足够数量的 Sentinel（大于等于配置文件指定的值）在指定的时间范围内确认Master的确进入 了主观下线状态， 则Master会被标记为客观下线 。</li><li>当Master被 Sentinel 标记为客观下线时，Sentinel 向下线的 Master 的所有 Slave 发送 INFO 命令 的频率会从 10 秒一次改为每秒一次 （在一般情况下， 每个 Sentinel 会以每 10 秒一次的频率向它 已知的所有Master，Slave发送 INFO 命令 ）。</li><li>若没有足够数量的 Sentinel 同意 Master 已经下线， Master 的客观下线状态就会变成主观下线。 若 Master 重新向 Sentinel 的 PING 命令返回有效回复， Master 的主观下线状态就会被移除</li><li>sentinel节点会与其他sentinel节点进行“沟通”，投票选举一个sentinel节点进行故障处理，在从节 点中选取一个主节点，其他从节点挂载到新的主节点上自动复制新主节点的数据</li></ol><h2 id="故障转移时会从剩下的slave选举一个新的master，被选举为-master的标准是什么"><a href="#故障转移时会从剩下的slave选举一个新的master，被选举为-master的标准是什么" class="headerlink" title="故障转移时会从剩下的slave选举一个新的master，被选举为 master的标准是什么"></a>故障转移时会从剩下的slave选举一个新的master，被选举为 master的标准是什么</h2><p>如果一个master节点被认为客观下线了，那么就会进行故障转移操作，从salve节点中选取一个节点作为master，让salve节点从选举出来的master上复制信息，选举条件如下：</p><ul><li>跟master断开连接的时长。 如果一个slave跟master断开连接已经超过了down-after-milliseconds的10倍，外加master宕机的 时长，那么slave就被认为不适合选举为master.</li><li>slave优先级。 按照slave优先级进行排序，slave priority越低，优先级就越高</li><li>复制offset。 如果slave priority相同，那么看replica offset，哪个slave复制了越多的数据，offset越靠后，优先</li><li>复制offset。 如果slave priority相同，那么看replica offset，哪个slave复制了越多的数据，offset越靠后，优先</li></ul><h2 id="为什么Redis哨兵集群只有2个节点无法正常工作？"><a href="#为什么Redis哨兵集群只有2个节点无法正常工作？" class="headerlink" title="为什么Redis哨兵集群只有2个节点无法正常工作？"></a>为什么Redis哨兵集群只有2个节点无法正常工作？</h2><p>哨兵集群必须部署2个以上节点。 如果两个哨兵实例，即两个Redis实例，一主一从的模式。 则Redis的配置quorum=1，表示一个哨兵认为master宕机即可认为master已宕机。 但是如果是机器1宕机了，那哨兵1和master都宕机了，虽然哨兵2知道master宕机了，但是这个时候， 需要majority，也就是大多数哨兵都是运行的，2个哨兵的majority就是2（2的majority=2，3的 majority=2，5的majority=3，4的majority=2），2个哨兵都运行着，就可以允许执行故障转移。 但此时哨兵1没了就只有1个哨兵了了，此时就没有majority来允许执行故障转移，所以故障转移不会执 行。</p><h1 id="Cluster"><a href="#Cluster" class="headerlink" title="Cluster"></a>Cluster</h1><blockquote><p>哨兵模式所带来的问题</p></blockquote><p>Redis 的哨兵模式基本已经可以实现高可用，读写分离 ，但是在这种模式下每台 Redis 服务器都 存储相同的数据，很浪费内存，所以在 Redis3.0 上加入了 Cluster 集群模式，实现了 Redis 的分 布式存储，对数据进行分片，也就是说每台 Redis 节点上存储不同的内容</p><p>Redis Cluster是社区版推出的Redis分布式集群解决方案，主要解决Redis分布式方面的需求，比如，当 遇到单机内存，并发和流量等瓶颈的时候，Redis Cluster能起到很好的负载均衡的目的。 Redis Cluster集群节点最小配置6个节点以上（3主3从），其中主节点提供读写操作，从节点作为备用 节点，不提供请求，只作为故障转移使用。 Redis Cluster采用虚拟槽分区，所有的键根据哈希函数映射到0～16383个整数槽内，每个节点负责维护 一部分槽以及槽所印映射的键值数据。</p><p><img src="/pic/cluster.png" alt="image-20210918165058046"></p><blockquote><p>优点</p></blockquote><ul><li>数据按照slot存储分布在多个节点，节点间数据共享，可动态调整数据分布</li><li>高可用性：部分节点不可用时，集群仍可用。通过增加Slave做standby数据副本，能够实现故障自动failover，节点之间通过gossip协议交换状态信息，用投票机制完成Slave到Master的角色提升；降低运维成本，提高系统的扩展性和可用性</li></ul><blockquote><p>缺点</p></blockquote><ul><li>Client实现复杂，驱动要求实现Smart Client，缓存slots mapping信息并及时更新，提高了开发难度，客户端的不成熟影响业务的稳定性。目前仅JedisCluster相对成熟，异常处理部分还不完善，比如常见的“max redirect exception”。</li><li>节点会因为某些原因发生阻塞（阻塞时间大于clutser-node-timeout）被判断下线，这种failover是没有必要的。</li><li>数据通过异步复制，不保证数据的强一致性。</li><li>多个业务使用同一套集群时，无法根据统计区分冷热数据，资源隔离性较差，容易出现相互影响的情况</li></ul><h2 id="Redis-cluster中是如何实现数据分布的"><a href="#Redis-cluster中是如何实现数据分布的" class="headerlink" title="Redis cluster中是如何实现数据分布的"></a><strong>Redis cluster</strong>中是如何实现数据分布的</h2><p>Redis cluster有固定的16384个hash slot（哈希槽），对每个key计算CRC16值，然后对16384取模，可以获取key对应的hash slot。</p><p>Redis cluster中每个master都会持有部分slot（槽），比如有3个master，那么可能每个master持有5000多个hash slot。</p><p>hash slot让node的增加和移除很简单，增加一个master，就将其他master的hash slot移动部分过去，减少一个master，就将它的hash slot移动到其他master上去。每次增加或减少master节点都是对16384取模，而不是根据master数量，这样原本在老的master上的数据不会因master的新增或减少而找不到。并且增加或减少master时Redis cluster移动hash slot的成本是非常低的</p><h2 id="Redis-cluster节点间通信是什么机制"><a href="#Redis-cluster节点间通信是什么机制" class="headerlink" title="Redis cluster节点间通信是什么机制"></a><strong>Redis cluster</strong>节点间通信是什么机制</h2><p>Redis cluster节点间采取gossip协议进行通信，所有节点都持有一份元数据，不同的节点如果出现了元数据的变更之后会不断地将元数据发送给其他节点让其他节点进行数据变更。节点互相之间不断通信，保持整个集群所有节点的数据是完整的。</p><p>主要交换故障信息、节点的增加和移除、hash slot信息等</p><p>这种机制的好处在于，元数据的更新比较分散，不是集中在一个地方，更新请求会陆陆续续，打到所有节点上去更新，有一定的延时，降低了压力;</p><p>缺点，元数据更新有延时，可能导致集群的一些操作会有一些滞后。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Sentinel&quot;&gt;&lt;a href=&quot;#Sentinel&quot; class=&quot;headerlink&quot; title=&quot;Sentinel&quot;&gt;&lt;/a&gt;Sentinel&lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;主从模式所带来的问题&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;主</summary>
-      
-    
-    
-    
-    <category term="数据库" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-    <category term="数据库" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
