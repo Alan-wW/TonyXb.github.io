@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-11-09T02:43:29.211Z</updated>
+  <updated>2021-11-11T03:15:54.272Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lc670-最大交换</title>
+    <link href="http://example.com/2021/11/11/Lc670-%E6%9C%80%E5%A4%A7%E4%BA%A4%E6%8D%A2/"/>
+    <id>http://example.com/2021/11/11/Lc670-%E6%9C%80%E5%A4%A7%E4%BA%A4%E6%8D%A2/</id>
+    <published>2021-11-11T02:57:10.000Z</published>
+    <updated>2021-11-11T03:15:54.272Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个非负整数，你<strong>至多</strong>可以交换一次数字中的任意两位。返回你能得到的最大值。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: <span class="number">2736</span></span><br><span class="line">输出: <span class="number">7236</span></span><br><span class="line">解释: 交换数字<span class="number">2</span>和数字<span class="number">7</span>。</span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: <span class="number">9973</span></span><br><span class="line">输出: <span class="number">9973</span></span><br><span class="line">解释: 不需要交换。</span><br></pre></td></tr></table></figure><h1 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h1><ol><li>维护一个长度为10的数组,存储每位元素最后一次出现的位置</li><li>遍历0 - n-1位置处的元素，用其和9-1之间的数比较<ol><li>如果比当前数的数出现的位置在当前数后面就交换</li></ol></li><li>因为只能交换一次所以只需要找到后面出现的最大数交换即可</li></ol><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumSwap</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] latest = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line">        <span class="comment">//记录每个数字最后出现的位置</span></span><br><span class="line">        String strNum = String.valueOf(num);</span><br><span class="line">        <span class="keyword">char</span>[] arr = strNum.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> n = arr.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            latest[arr[i] - <span class="string">&#x27;0&#x27;</span>] = i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n - <span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">9</span>;j &gt; arr[i] - <span class="string">&#x27;0&#x27;</span>;j--)&#123;</span><br><span class="line">                <span class="keyword">if</span>(latest[j] &gt; i)&#123;</span><br><span class="line">                    exch(arr,latest[j],i);</span><br><span class="line">                    <span class="keyword">return</span> Integer.parseInt(<span class="keyword">new</span> String(arr));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exch</span><span class="params">(<span class="keyword">char</span>[] arr,<span class="keyword">int</span> index1,<span class="keyword">int</span> index2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">char</span> tem = arr[index1];</span><br><span class="line">        arr[index1] = arr[index2];</span><br><span class="line">        arr[index2] = tem;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;给定一个非负整数，你&lt;strong&gt;至多&lt;/strong&gt;可以交换一次数字中的任意两位。返回你能得到的最大值。&lt;/p&gt;
+&lt;h</summary>
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="数据结构与算法" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Lc662-二叉树的最大宽度</title>
@@ -468,31 +493,6 @@
       
     <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;圆环上有10个点，编号为0~9。从0点出发，每次可以逆时针和顺时针走一步，问走n步回到0点共有多少种走法。&lt;/p&gt;
 &lt;h1 </summary>
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="数据结构与算法" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lc143:重排链表</title>
-    <link href="http://example.com/2021/10/07/Lc143-%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/"/>
-    <id>http://example.com/2021/10/07/Lc143-%E9%87%8D%E6%8E%92%E9%93%BE%E8%A1%A8/</id>
-    <published>2021-10-07T13:33:27.000Z</published>
-    <updated>2021-10-07T13:44:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给定一个单链表 L 的头节点 head ，单链表 L 表示为：</p><p> L0 → L1 → … → Ln-1 → Ln<br>请将其重新排列后变为：</p><p>L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → …</p><p>不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p><img src="/pic/lc143.png" alt="image-20211007213445816"></p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入: head = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">输出: [<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure><h1 id="数据范围"><a href="#数据范围" class="headerlink" title="数据范围"></a>数据范围</h1><ul><li>链表的长度范围为 <code>[1, 5 * 104]</code></li><li><code>1 &lt;= node.val &lt;= 1000</code></li></ul><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ol><li>找到链表中点<ol><li>通过快慢指针,快指针每次走两步，慢指针每次走一步</li><li>当快指针为空或快指针下一个节点为空时，慢节点所在位置即为链表中点</li><li>当链表为偶数时，慢指针所在位置为中点靠后的位置</li></ol></li><li>将链表按中点分为两部分，记为A,B</li><li>对后半部分进行反转</li><li>对两块链表做归并操作<ol><li>分别记录两链表next指针位置,A_next = A.next,B_next = B.next</li><li>A.next = B,A = A_next</li><li>B.next = A,B = B_next</li></ol></li></ol><h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode() &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val) &#123; this.val = val; &#125;</span></span><br><span class="line"><span class="comment"> *     ListNode(int val, ListNode next) &#123; this.val = val; this.next = next; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//找到链表中点</span></span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head;</span><br><span class="line">        <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//将中间节点右侧节点反转</span></span><br><span class="line">        ListNode tem = slow.next;</span><br><span class="line">        slow.next = <span class="keyword">null</span>;</span><br><span class="line">        ListNode newHead = reverse(tem);</span><br><span class="line">        <span class="comment">//元素交换</span></span><br><span class="line">        ListNode cur = head;</span><br><span class="line">        <span class="keyword">while</span>(cur != <span class="keyword">null</span> &amp;&amp; newHead != <span class="keyword">null</span>)&#123;</span><br><span class="line">            ListNode l1_next = cur.next;</span><br><span class="line">            ListNode l2_next = newHead.next;</span><br><span class="line"></span><br><span class="line">            cur.next = newHead;</span><br><span class="line">            cur = l1_next;</span><br><span class="line">            newHead.next = cur;</span><br><span class="line">            newHead = l2_next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode last = reverse(head.next);</span><br><span class="line">        head.next.next = head;</span><br><span class="line">        head.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;给定一个单链表 L 的头节点 head ，单链表 L 表示为：&lt;/p&gt;
-&lt;p&gt; L0 → L1 → … → Ln-1 → L</summary>
       
     
     
