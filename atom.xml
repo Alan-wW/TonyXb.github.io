@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-11-26T01:19:52.758Z</updated>
+  <updated>2022-04-23T03:34:52.065Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Lc318-最大单词长度乘积</title>
+    <link href="http://example.com/2022/04/23/Lc318-%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/"/>
+    <id>http://example.com/2022/04/23/Lc318-%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/</id>
+    <published>2022-04-23T03:31:40.000Z</published>
+    <updated>2022-04-23T03:34:52.065Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大值，并且这两个单词不含有公共字母。如果不存在这样的两个单词，返回 0 。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：words = [<span class="string">&quot;abcw&quot;</span>,<span class="string">&quot;baz&quot;</span>,<span class="string">&quot;foo&quot;</span>,<span class="string">&quot;bar&quot;</span>,<span class="string">&quot;xtfn&quot;</span>,<span class="string">&quot;abcdef&quot;</span>]</span><br><span class="line">输出：<span class="number">16</span> </span><br><span class="line">解释：这两个单词为 <span class="string">&quot;abcw&quot;</span>, <span class="string">&quot;xtfn&quot;</span>。</span><br></pre></td></tr></table></figure><h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProduct</span><span class="params">(String[] words)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n = words.length;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(String str:words)&#123;</span><br><span class="line">            nums[idx++] = convert(str);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//用每个单词一次去和其他单词做&amp;运算，结果为0说明不含有公共单词,&amp;运算：对应位都为1才为1，否则为0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>;j &lt; n;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((nums[i] &amp; nums[j]) == <span class="number">0</span>)&#123;</span><br><span class="line">                    ans = Math.max(ans,words[i].length() * words[j].length());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将每个单词映射到一个int类型变量上</span></span><br><span class="line">    <span class="comment">//abcd 对应二进制位从低到高 ｜运算：对应为都为0才为0，否则为1</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">convert</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; s.length();i++)&#123;</span><br><span class="line">            ans |= (<span class="number">1</span> &lt;&lt; (s.charAt(i) - <span class="string">&#x27;a&#x27;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;给你一个字符串数组 words ，找出并返回 length(words[i]) * length(words[j]) 的最大</summary>
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Lc456-132模式</title>
@@ -468,31 +490,6 @@
       
     <summary type="html">&lt;h1 id=&quot;题目概述&quot;&gt;&lt;a href=&quot;#题目概述&quot; class=&quot;headerlink&quot; title=&quot;题目概述&quot;&gt;&lt;/a&gt;题目概述&lt;/h1&gt;&lt;p&gt;给你一个链表，每 k 个节点一组进行翻转，请你返回翻转后的链表。&lt;/p&gt;
 &lt;p&gt;k 是一个正整数，它的值小于或等于链表的长度</summary>
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://example.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="数据结构与算法" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Lc69-实现Sqrt(x)</title>
-    <link href="http://example.com/2021/10/09/Lc69-%E5%AE%9E%E7%8E%B0Sqrt-x/"/>
-    <id>http://example.com/2021/10/09/Lc69-%E5%AE%9E%E7%8E%B0Sqrt-x/</id>
-    <published>2021-10-09T13:09:45.000Z</published>
-    <updated>2021-10-09T13:17:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>给你一个非负整数 x ，计算并返回 x 的 算术平方根 。</p><p>由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。</p><p>注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。</p><h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">4</span></span><br><span class="line">输出：<span class="number">2</span></span><br></pre></td></tr></table></figure><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">输入：x = <span class="number">8</span></span><br><span class="line">输出：<span class="number">2</span></span><br><span class="line">解释：<span class="number">8</span> 的算术平方根是 <span class="number">2.82842</span>..., 由于返回类型是整数，小数部分将被舍去。</span><br></pre></td></tr></table></figure><h1 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h1><ol><li>通过二分法，比较mid * mid 和 x的关系从而缩小范围</li></ol><h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> right = x;</span><br><span class="line">        <span class="keyword">int</span> ans = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line">            <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>((<span class="keyword">long</span>)mid * mid &lt;= x)&#123;</span><br><span class="line">                ans = mid;</span><br><span class="line">                left = mid + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                right = mid - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;题目描述&quot;&gt;&lt;a href=&quot;#题目描述&quot; class=&quot;headerlink&quot; title=&quot;题目描述&quot;&gt;&lt;/a&gt;题目描述&lt;/h1&gt;&lt;p&gt;给你一个非负整数 x ，计算并返回 x 的 算术平方根 。&lt;/p&gt;
-&lt;p&gt;由于返回类型是整数，结果只保留 整数部分 ，小数部</summary>
       
     
     
